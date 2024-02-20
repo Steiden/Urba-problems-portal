@@ -1,0 +1,42 @@
+@import "../../../scss/mixins/flex-mixin.scss";
+@import "../../../scss/mixins/transition-mixin.scss";
+@import "../../../scss/variables/global-variables.scss";
+
+.main__about {
+    @include flex-direction($gap: 15px);
+
+    padding-block: 50px;
+}
+
+.main__text {
+    font-size: 21px;
+}
+
+.main__button-container {
+    @include flex-direction($direction: row, $gap: 20px);
+
+    margin-block: 15px;
+}
+
+.main__button {
+    @include transition-opacity($duration: .1s);
+
+    border-radius: 5px;
+    padding: 8px 12px;
+
+    font-size: 18px;
+    color: $white;
+
+
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+.main__button_green {
+    background-color: $green;
+}
+
+.main__button_blue {
+    background-color: $blue;
+}

@@ -1,0 +1,50 @@
+@import "../../../scss/mixins/flex-mixin.scss";
+@import "../../../scss/variables/global-variables.scss";
+
+.main__card {
+    @include flex-direction($direction: column, $gap: 15px);
+
+    position: relative;
+    overflow: hidden;
+
+    border: $border;
+    border-radius: $border-radius-10;
+}
+
+.main__card-label {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+
+    color: $white;
+
+    border-radius: $border-radius-15;
+
+    padding: 2px 15px;
+}
+
+.main__card-label_new {
+    background-color: $green;
+}
+
+.main__card-label_solved {
+    background-color: $yellow;
+}
+
+.main__card-label_closed {
+    background-color: $red;
+}
+
+.main__card-img {
+}
+
+.main__card-content {
+    @include flex-direction($direction: column, $gap: 10px);
+    padding: 10px;
+}
+
+.main__card-title {
+}
+
+.main__card-text {
+}

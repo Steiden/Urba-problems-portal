@@ -1,0 +1,60 @@
+@import "../../../scss/mixins/flex-mixin";
+@import "../../../scss/mixins/transition-mixin";
+@import "../../../scss/mixins/visually-hidden-mixin";
+@import "../../../scss/variables/global-variables";
+@import "./Dropdown-variables.scss";
+
+.dropdown {
+    position: absolute;
+    translate: 0 5px;
+    z-index: $z-index-100;
+}
+
+.header__dropdown {
+    @include flex-center(column);
+    @include transition-opacity($duration: 0.2s);
+
+    border: $border;
+    border-radius: $border-radius-5;
+
+    padding-block: 10px;
+
+    width: $dropdown-width;
+}
+
+.header__dropdown_hidden {
+    @include visualy-hidden();
+}
+
+.header__dropdown-item {
+    width: 100%;
+}
+
+.header__dropdown-link {
+    @include transition-custom($property: background-color, $duration: 0.1s);
+
+    font: {
+        size: 14px;
+    }
+
+    display: block;
+    padding: 5px 15px;
+
+    &:hover {
+        background-color: $light-gray;
+    }
+}
+
+.header__dropdown-hr {
+    width: 100%;
+    margin-block: 10px;
+}
+
+.dropdown__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: $z-index-10;
+}

@@ -1,0 +1,16 @@
+@import "../../../scss/mixins/flex-mixin.scss";
+@import "../../../scss/mixins/grid-mixin.scss";
+
+.main__problems {
+    @include flex-direction($direction: column, $gap: 50px);
+    
+    margin-block: 50px;
+}
+
+.main__title-2 {
+    font-weight: 400;
+}
+
+.main__cards-container {
+    @include grid-column($columns: 3, $gap: 50px);
+}

@@ -1,0 +1,23 @@
+@mixin transition-custom($property: all, $interpolar: linear, $duration: 0.3s) {
+    transition: $property $interpolar $duration;
+}
+
+@mixin transition-all($interpolar: linear, $duration: 0.3s) {
+    transition: all $interpolar $duration;
+}
+
+@mixin transition-transform($interpolar: linear, $duration: 0.3s) {
+    transition: transform $interpolar $duration;
+}
+
+@mixin transition-opacity($interpolar: linear, $duration: 0.3s) {
+    transition: opacity $interpolar $duration;
+}
+
+@mixin transition-linear($duration: 0.3s) {
+    transition: all linear $duration;
+}
+
+@mixin transition-ease($duration: 0.3s) {
+    transition: all ease $duration;
+}

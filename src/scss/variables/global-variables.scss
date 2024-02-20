@@ -1,0 +1,18 @@
+@import "./colors-variables";
+
+// Паддинг контейнера
+$container-padding: 0 150px;
+
+// Рамка
+$border: 1px solid $black;
+
+// Закругление рамки
+$border-radius-5: 5px;
+$border-radius-10: 10px;
+$border-radius-15: 15px;
+
+// Свойство z-index
+$z-index-1: 1;
+$z-index-10: 10;
+$z-index-100: 100;
+$z-index-1000: 1000;

@@ -1,0 +1,6 @@
+@mixin visualy-hidden() {
+    @include transition-all();
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+}

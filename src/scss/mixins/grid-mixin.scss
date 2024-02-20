@@ -1,0 +1,17 @@
+@mixin grid-column($columns, $gap: 0) {
+    display: grid;
+    grid-template: auto / repeat($columns, 1fr);
+    gap: $gap;
+}
+
+@mixin grid-row($rows, $gap: 0) {
+    display: grid;
+    grid-template: repeat($rows, 1fr) / auto;
+    gap: $gap;
+}
+
+@mixin grid($columns, $rows, $gap: 0) {
+    display: grid;
+    grid-template: repeat($rows, 1fr) / repeat($columns, 1fr);
+    gap: $gap;
+}

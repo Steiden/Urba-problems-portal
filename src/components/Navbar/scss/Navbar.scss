@@ -1,0 +1,53 @@
+@import "../../../scss/mixins/flex-mixin";
+@import "../../../scss/mixins/transition-mixin";
+@import "../../../scss/mixins/visually-hidden-mixin";
+@import "../../../scss/variables/global-variables";
+@import "./Navbar-variables.scss";
+
+.header__logo {
+    font-size: $logo-font-size;
+}
+
+.header__nav {
+}
+
+.header__list {
+    @include flex-center(row);
+}
+
+.header__item {
+    position: relative;
+
+    font-size: $element-font-size;
+
+    &:not(.header__item_selected) > .header__link:hover {
+        background-color: $light-gray;
+    }
+
+    &:not(.header__item_selected) > .header__button:hover {
+        background-color: $light-gray;
+    }
+}
+
+//// .header__item_selected {
+////     font: {
+////         weight: bold;
+////         size: 17px;
+////     }
+////     color: $blue;
+//// }
+
+.header__link,
+.header__button {
+    @include transition-custom($property: background-color, $duration: 0.1s);
+    padding: $item-padding;
+    font-size: $element-font-size;
+}
+
+.header__button-dropdown {
+    &::after {
+        content: "▼";
+        font-size: 10px;
+        margin-left: 5px;
+    }
+}
