@@ -1,3 +1,4 @@
+@import "../../../scss/variables/global-variables.scss";
 @import "../../../scss/variables/colors-variables.scss";
 
 .overlay {
@@ -6,5 +7,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: $black-transparent;
+    background-color: $black-extra-transparent;
+    z-index: $z-index-100;
 }
