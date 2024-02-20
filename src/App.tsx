@@ -1,9 +1,12 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Header } from "./components/Header/Header";
 import { Main } from "./components/Main/Main";
 import "./App.scss";
+import { AuthForm } from "./components/AuthForm/AuthForm";
 
 function App() {
+
+    const [authFormIsOpen, setAuthFormIsOpen] = useState(false);
 
     useEffect(() => {
         const title: HTMLHeadElement = document.querySelector("title") as HTMLHeadElement;
@@ -20,8 +23,9 @@ function App() {
 
     return (
         <>
-            <Header />
+            <Header authForm={{ authFormIsOpen, setAuthFormIsOpen }} />
             <Main />
+            <AuthForm authForm={{ authFormIsOpen, setAuthFormIsOpen }} />
         </>
     );
 }

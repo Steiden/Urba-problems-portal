@@ -3,12 +3,17 @@ import { Dropdown } from "../Dropdown/Dropdown";
 import "./scss/Navbar.scss";
 
 type TypeProps = {
-    dropdownIsOpen: boolean;
-    setDropdownIsOpen: (isOpen: boolean) => void;
+    authForm: {
+        authFormIsOpen: boolean;
+        setAuthFormIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    };
+    dropdown: {
+        dropdownIsOpen: boolean;
+        setDropdownIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    };
 };
 
-export const Navbar = ({ dropdownIsOpen, setDropdownIsOpen }: TypeProps): ReactNode => {
-
+export const Navbar = ({ authForm, dropdown }: TypeProps): ReactNode => {
     return (
         <nav className="header__nav">
             <ul className="header__list">
@@ -18,18 +23,26 @@ export const Navbar = ({ dropdownIsOpen, setDropdownIsOpen }: TypeProps): ReactN
                     </a>
                 </li>
                 <li className="header__item">
-                    <button className="header__button">Зарегистрироваться</button>
+                    <button
+                        className="header__button"
+                        onClick={() => authForm.setAuthFormIsOpen(true)}>
+                        Зарегистрироваться
+                    </button>
                 </li>
                 <li className="header__item">
-                    <button className="header__button">Войти</button>
+                    <button
+                        className="header__button"
+                        onClick={() => authForm.setAuthFormIsOpen(true)}>
+                        Войти
+                    </button>
                 </li>
                 <li className="header__item">
                     <button
                         className="header__button header__button-dropdown"
-                        onClick={() => setDropdownIsOpen(!dropdownIsOpen)}>
+                        onClick={() => dropdown.setDropdownIsOpen(!dropdown.dropdownIsOpen)}>
                         Иванов И.И.
                     </button>
-                    <Dropdown isOpen={dropdownIsOpen} />
+                    <Dropdown isOpen={dropdown.dropdownIsOpen} />
                 </li>
             </ul>
         </nav>
