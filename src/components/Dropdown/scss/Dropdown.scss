@@ -5,25 +5,29 @@
 @import "./Dropdown-variables.scss";
 
 .dropdown {
-    position: absolute;
-    translate: 0 5px;
-    z-index: $z-index-100;
-}
+    @include transition-all($duration: 0.3s);
+    @include visualy-hidden();
 
-.header__dropdown {
-    @include flex-center(column);
-    @include transition-opacity($duration: 0.2s);
+    background-color: $white;
 
     border: $border;
     border-radius: $border-radius-5;
 
-    padding-block: 10px;
+    position: absolute;
+    translate: 0 5px;
+    z-index: $z-index-100;
 
     width: $dropdown-width;
 }
 
-.header__dropdown_hidden {
-    @include visualy-hidden();
+.header__dropdown {
+    @include flex-center(column);
+
+    padding-block: 10px;
+}
+
+.dropdown_active {
+    @include visualy-hidden-active();
 }
 
 .header__dropdown-item {

@@ -8,8 +8,8 @@ type TypeProps = {
 export const Dropdown = ({ isOpen }: TypeProps): ReactNode => {
     return (
         <>
-            <div className="dropdown">
-                <ul className={`header__dropdown ${isOpen ? "" : "header__dropdown_hidden"}`}>
+            <div className={`dropdown ${isOpen ? "dropdown_active" : ""}`}>
+                <ul className="header__dropdown">
                     <li className="header__dropdown-item">
                         <a href="#" className="header__dropdown-link">
                             Мои данные
