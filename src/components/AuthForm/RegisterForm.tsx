@@ -69,6 +69,7 @@ export const RegisterForm = ({ registerForm }: TypeProps): ReactNode => {
                     type="text"
                     name="fio"
                     placeholder="ФИО"
+                    maxLength={100}
                     required
                     value={fio}
                     onChange={(e) => setFio(e.target.value)}
@@ -81,6 +82,7 @@ export const RegisterForm = ({ registerForm }: TypeProps): ReactNode => {
                     type="text"
                     name="login"
                     placeholder="Логин"
+                    maxLength={30}
                     required
                     value={login}
                     onChange={(e) => setLogin(e.target.value)}
@@ -93,6 +95,7 @@ export const RegisterForm = ({ registerForm }: TypeProps): ReactNode => {
                     type="email"
                     name="email"
                     placeholder="E-mail"
+                    maxLength={64}
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -105,6 +108,7 @@ export const RegisterForm = ({ registerForm }: TypeProps): ReactNode => {
                     type="password"
                     name="password"
                     placeholder="Пароль"
+                    maxLength={64}
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -116,6 +120,7 @@ export const RegisterForm = ({ registerForm }: TypeProps): ReactNode => {
                     className="auth__input"
                     type="password"
                     placeholder="Повторите пароль"
+                    maxLength={64}
                     required
                     value={passwordCheck}
                     onChange={(e) => setPasswordCheck(e.target.value)}
