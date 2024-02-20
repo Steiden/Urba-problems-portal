@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { Header } from "./components/Header/Header";
 import { Main } from "./components/Main/Main";
+import { LoginForm } from "./components/AuthForm/LoginForm";
+import { RegisterForm } from "./components/AuthForm/RegisterForm";
 import "./App.scss";
-import { AuthForm } from "./components/AuthForm/AuthForm";
 
 function App() {
-
-    const [authFormIsOpen, setAuthFormIsOpen] = useState(false);
+    const [loginFormIsOpen, setLoginFormIsOpen] = useState(false);
+    const [registerFormIsOpen, setRegisterFormIsOpen] = useState(false);
 
     useEffect(() => {
         const title: HTMLHeadElement = document.querySelector("title") as HTMLHeadElement;
@@ -19,13 +20,18 @@ function App() {
         link.href = "../img/1476434895129645719.jpg";
 
         head.appendChild(link);
-    }, [])
+    }, []);
 
     return (
         <>
-            <Header authForm={{ authFormIsOpen, setAuthFormIsOpen }} />
+            <Header
+                loginForm={{ loginFormIsOpen, setLoginFormIsOpen }}
+                registerForm={{ registerFormIsOpen, setRegisterFormIsOpen }}
+            />
             <Main />
-            <AuthForm authForm={{ authFormIsOpen, setAuthFormIsOpen }} />
+
+            <LoginForm loginForm={{ loginFormIsOpen, setLoginFormIsOpen }} />
+            <RegisterForm registerForm={{ registerFormIsOpen, setRegisterFormIsOpen }} />
         </>
     );
 }

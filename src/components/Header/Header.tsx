@@ -3,13 +3,17 @@ import { Navbar } from "../Navbar/Navbar";
 import "./scss/Header.scss";
 
 type TypeProps = {
-    authForm: {
-        authFormIsOpen: boolean;
-        setAuthFormIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    loginForm: {
+        loginFormIsOpen: boolean;
+        setLoginFormIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
     };
-}
+    registerForm: {
+        registerFormIsOpen: boolean;
+        setRegisterFormIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    };
+};
 
-export const Header = ({ authForm }: TypeProps): ReactNode => {
+export const Header = ({ loginForm, registerForm }: TypeProps): ReactNode => {
     const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
 
     return (
@@ -18,7 +22,11 @@ export const Header = ({ authForm }: TypeProps): ReactNode => {
                 <a href="#" className="header__logo">
                     Городской портал
                 </a>
-                <Navbar authForm={authForm} dropdown={{ dropdownIsOpen, setDropdownIsOpen }} />
+                <Navbar
+                    loginForm={loginForm}
+                    registerForm={registerForm}
+                    dropdown={{ dropdownIsOpen, setDropdownIsOpen }}
+                />
             </div>
             {dropdownIsOpen && <div className="dropdown__overlay" onClick={() => setDropdownIsOpen(false)}></div>}
         </header>

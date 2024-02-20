@@ -3,9 +3,13 @@ import { Dropdown } from "../Dropdown/Dropdown";
 import "./scss/Navbar.scss";
 
 type TypeProps = {
-    authForm: {
-        authFormIsOpen: boolean;
-        setAuthFormIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    loginForm: {
+        loginFormIsOpen: boolean;
+        setLoginFormIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    };
+    registerForm: {
+        registerFormIsOpen: boolean;
+        setRegisterFormIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
     };
     dropdown: {
         dropdownIsOpen: boolean;
@@ -13,7 +17,7 @@ type TypeProps = {
     };
 };
 
-export const Navbar = ({ authForm, dropdown }: TypeProps): ReactNode => {
+export const Navbar = ({ loginForm, registerForm, dropdown }: TypeProps): ReactNode => {
     return (
         <nav className="header__nav">
             <ul className="header__list">
@@ -23,16 +27,12 @@ export const Navbar = ({ authForm, dropdown }: TypeProps): ReactNode => {
                     </a>
                 </li>
                 <li className="header__item">
-                    <button
-                        className="header__button"
-                        onClick={() => authForm.setAuthFormIsOpen(true)}>
+                    <button className="header__button" onClick={() => registerForm.setRegisterFormIsOpen(true)}>
                         Зарегистрироваться
                     </button>
                 </li>
                 <li className="header__item">
-                    <button
-                        className="header__button"
-                        onClick={() => authForm.setAuthFormIsOpen(true)}>
+                    <button className="header__button" onClick={() => loginForm.setLoginFormIsOpen(true)}>
                         Войти
                     </button>
                 </li>
