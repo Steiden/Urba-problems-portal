@@ -47,7 +47,19 @@
     width: 100%;
 }
 
+.auth__input-error {
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 15px;
+    color: $red;
+}
+
 .auth__input-container {
+    @include flex-align($direction: column, $gap: 5px);
+    width: 100%;
+}
+
+.auth__checkbox-container {
     @include flex-center($direction: row, $gap: 5px);
 }
 
@@ -72,8 +84,12 @@
     padding: 10px;
     width: 50%;
 
-    &:hover {
+    &:not(:disabled):hover {
         background-color: $light-gray;
+    }
+
+    &:disabled {
+        cursor: default;
     }
 }
 
