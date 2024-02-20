@@ -47,6 +47,19 @@
     width: 100%;
 }
 
+.auth__input-container {
+    @include flex-center($direction: row, $gap: 5px);
+}
+
+.auth__checkbox {
+    width: 15px;
+    height: 15px;
+}
+
+.auth__label {
+    font-size: 14px;
+}
+
 .auth__button {
     @include transition-custom($property: background-color, $duration: .1s);
 

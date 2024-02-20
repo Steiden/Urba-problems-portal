@@ -21,6 +21,10 @@ export const RegisterForm = ({ registerForm }: TypeProps): ReactNode => {
             <input className="auth__input" type="email" name="email" placeholder="E-mail" required />
             <input className="auth__input" type="password" name="password" placeholder="Пароль" required />
             <input className="auth__input" type="password" placeholder="Повторите пароль" required />
+            <div className="auth__input-container">
+                <input className="auth__checkbox" type="checkbox" name="consent" id="consent" checked={true} />
+                <label className="auth__label" htmlFor="consent">Согласие на обработку персональных данных</label>
+            </div>
             <button className="auth__button" type="submit">
                 Зарегистрироваться
             </button>
