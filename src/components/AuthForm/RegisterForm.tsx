@@ -38,8 +38,10 @@ export const RegisterForm = ({ registerForm }: TypeProps): ReactNode => {
             } else setIsCorrectFio(true);
     
             // TODO Сделать проверку на занятость логина (Это надо БД использовать)
+            setIsCorrectLogin(true);
     
             // TODO Сделать проверку на занятость почты (Это надо БД использовать)
+            setIsCorrectEmail(true);
     
             if (password !== "" && password.length < 8) {
                 setIsCorrectPassword(false);
