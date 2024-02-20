@@ -21,8 +21,8 @@
     border: $border;
     border-radius: $border-radius-15;
 
-    padding: 15px 50px;
-    width: 500px;
+    padding: $auth-form-padding;
+    width: $auth-form-width;
 }
 
 .auth_active {
@@ -41,7 +41,7 @@
 .auth__input {
     border-radius: $border-radius-5;
 
-    font-size: 16px;
+    font-size: $auth-form-font-size;
 
     padding: 10px 15px;
     width: 100%;
@@ -51,7 +51,7 @@
     @include transition-custom($property: background-color, $duration: .1s);
 
     background-color: $white;
-    font-size: 16px;
+    font-size: $auth-form-font-size;
 
     border: $border;
     border-radius: $border-radius-5;
