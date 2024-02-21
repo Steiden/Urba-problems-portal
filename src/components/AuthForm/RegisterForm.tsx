@@ -9,7 +9,6 @@ type TypeProps = {
 };
 
 export const RegisterForm = ({ registerForm }: TypeProps): ReactNode => {
-
     // ___________Данные для регистрации____________
     const [fio, setFio] = useState("");
     const [login, setLogin] = useState("");
@@ -19,7 +18,6 @@ export const RegisterForm = ({ registerForm }: TypeProps): ReactNode => {
     const [consentIsChecked, setConsentIsChecked] = useState(true);
     // _____________________________________________
 
-
     // __________Корректность введенных данных____________
     const [isCorrectFio, setIsCorrectFio] = useState(true);
     const [isCorrectLogin, setIsCorrectLogin] = useState(true);
@@ -28,7 +26,6 @@ export const RegisterForm = ({ registerForm }: TypeProps): ReactNode => {
     const [isCorrectPasswordCheck, setIsCorrectPasswordCheck] = useState(true);
     // ____________________________________________________
 
-
     // ___________Проверка корректности введенных данных____________
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -36,18 +33,18 @@ export const RegisterForm = ({ registerForm }: TypeProps): ReactNode => {
                 setIsCorrectFio(false);
                 return;
             } else setIsCorrectFio(true);
-    
+
             // TODO Сделать проверку на занятость логина (Это надо БД использовать)
             setIsCorrectLogin(true);
-    
+
             // TODO Сделать проверку на занятость почты (Это надо БД использовать)
             setIsCorrectEmail(true);
-    
+
             if (password !== "" && password.length < 8) {
                 setIsCorrectPassword(false);
                 return;
             } else setIsCorrectPassword(true);
-    
+
             if (passwordCheck !== "" && password !== passwordCheck) {
                 setIsCorrectPasswordCheck(false);
                 return;
@@ -115,7 +112,9 @@ export const RegisterForm = ({ registerForm }: TypeProps): ReactNode => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                {!isCorrectPassword && <span className="auth__input-error">*Пароль должен содержать не менее 8 символов</span>}
+                {!isCorrectPassword && (
+                    <span className="auth__input-error">*Пароль должен содержать не менее 8 символов</span>
+                )}
             </div>
             <div className="auth__input-container">
                 <input
@@ -142,7 +141,17 @@ export const RegisterForm = ({ registerForm }: TypeProps): ReactNode => {
                     Согласие на обработку персональных данных
                 </label>
             </div>
-            <button className="auth__button" type="submit" disabled={!consentIsChecked}>
+            <button
+                className="auth__button"
+                type="submit"
+                disabled={
+                    !isCorrectFio ||
+                    !isCorrectLogin ||
+                    !isCorrectEmail ||
+                    !isCorrectPassword ||
+                    !isCorrectPasswordCheck ||
+                    !consentIsChecked
+                }>
                 Зарегистрироваться
             </button>
         </AuthForm>
