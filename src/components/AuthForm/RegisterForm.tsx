@@ -28,30 +28,26 @@ export const RegisterForm = ({ registerForm }: TypeProps): ReactNode => {
 
     // ___________Проверка корректности введенных данных____________
     useEffect(() => {
-        const timeout = setTimeout(() => {
-            if (fio !== "" && fio.trim().split(" ").length !== 3) {
-                setIsCorrectFio(false);
-                return;
-            } else setIsCorrectFio(true);
+        if (fio !== "" && fio.trim().split(" ").length !== 3) {
+            setIsCorrectFio(false);
+            return;
+        } else setIsCorrectFio(true);
 
-            // TODO Сделать проверку на занятость логина (Это надо БД использовать)
-            setIsCorrectLogin(true);
+        // TODO Сделать проверку на занятость логина (Это надо БД использовать)
+        setIsCorrectLogin(true);
 
-            // TODO Сделать проверку на занятость почты (Это надо БД использовать)
-            setIsCorrectEmail(true);
+        // TODO Сделать проверку на занятость почты (Это надо БД использовать)
+        setIsCorrectEmail(true);
 
-            if (password !== "" && password.length < 8) {
-                setIsCorrectPassword(false);
-                return;
-            } else setIsCorrectPassword(true);
+        if (password !== "" && password.length < 8) {
+            setIsCorrectPassword(false);
+            return;
+        } else setIsCorrectPassword(true);
 
-            if (passwordCheck !== "" && password !== passwordCheck) {
-                setIsCorrectPasswordCheck(false);
-                return;
-            } else setIsCorrectPasswordCheck(true);
-        }, 1000);
-
-        return () => clearTimeout(timeout);
+        if (passwordCheck !== "" && password !== passwordCheck) {
+            setIsCorrectPasswordCheck(false);
+            return;
+        } else setIsCorrectPasswordCheck(true);
     }, [fio, login, email, password, passwordCheck, consentIsChecked]);
     // ______________________________________________________________
 
