@@ -1,4 +1,5 @@
 import { ReactNode, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import "./scss/Profile.scss";
 
 export const Profile = (): ReactNode => {
@@ -8,6 +9,8 @@ export const Profile = (): ReactNode => {
     const [login, setLogin] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const navigate = useNavigate();
 
     return (
         <section className="profile">
@@ -125,7 +128,7 @@ export const Profile = (): ReactNode => {
                         disabled={!secondName || !firstName || !patronymic || !login || !email || !password}>
                         Сохранить изменения
                     </button>
-                    <button className="profile__button" type="button" onClick={() => {}}>
+                    <button className="profile__button" type="button" onClick={() => {navigate('/')}}>
                         Отмена
                     </button>
                 </div>
