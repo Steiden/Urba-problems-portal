@@ -1,0 +1,99 @@
+@import "../../../scss/mixins/flex-mixin.scss";
+@import "../../../scss/mixins/transition-mixin.scss";
+@import "../../../scss/variables/global-variables.scss";
+@import "../../../scss/variables/colors-variables.scss";
+
+.profile {
+    @include flex-direction($gap: 20px);
+
+    border: $border;
+    border-radius: $border-radius-15;
+
+    margin-top: 50px;
+
+    overflow: hidden;
+}
+
+.profile__form {
+    @include flex-direction($gap: 50px);
+
+    backdrop-filter: blur(15px);
+
+    padding: 30px;
+    width: 100%;
+}
+
+.profile__inputs-container {
+    @include flex-center($gap: 25px);
+
+    width: 100%;
+
+    &--horizontal {
+        flex-direction: row;
+    }
+    &--vertical {
+        flex-direction: column;
+    }
+}
+
+.profile__input-container {
+    @include flex-direction($gap: 5px);
+
+    width: 100%;
+}
+
+.profile__label {
+    font: {
+        size: 22px;
+        weight: 500;
+    }
+}
+
+.profile__input {
+    font: {
+        size: 18px;
+    }
+
+    background-color: $extra-light-gray;
+    border: $border;
+    border-radius: $border-radius-10;
+
+    padding: 5px 15px;
+    width: clamp(200px, 100%, 400px);
+}
+
+.profile__split {
+    @include flex-justify($justify: space-around, $direction: row, $gap: 15px);
+
+    width: 100%;
+}
+
+.profile__avatar-container {
+    @include flex-center();
+    width: 50%;
+}
+
+.profile__avatar {
+    border-radius: $border-radius-5;
+}
+
+.profile__buttons-container {
+    @include flex-center($direction: row, $gap: 10px);
+}
+
+.profile__button {
+    @include transition-custom($property: background-color);
+    font: {
+        size: 18px;
+    }
+
+    background-color: $extra-light-gray;
+    border: $border;
+    border-radius: $border-radius-10;
+
+    padding: 10px 15px;
+
+    &--save:hover {
+        background-color: $green-light;
+    }
+}
