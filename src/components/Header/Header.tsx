@@ -3,6 +3,7 @@ import { Navbar } from "../Navbar/Navbar";
 import { LoginForm } from "../AuthForm/LoginForm";
 import { RegisterForm } from "../AuthForm/RegisterForm";
 import "./scss/Header.scss";
+import { Link } from "react-router-dom";
 
 export const Header = (): ReactNode => {
     const [loginFormIsOpen, setLoginFormIsOpen] = useState(false);
@@ -12,9 +13,9 @@ export const Header = (): ReactNode => {
     return (
         <header className="header">
             <div className="container header__container">
-                <a href="/" className="header__logo">
+                <Link to="/" className="header__logo">
                     Городской портал
-                </a>
+                </Link>
                 <Navbar dropdown={{ dropdownIsOpen, setDropdownIsOpen }}>
                     <li className="header__item">
                         <button className="header__button" onClick={() => setRegisterFormIsOpen(true)}>

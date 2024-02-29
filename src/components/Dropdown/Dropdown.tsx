@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import "./scss/Dropdown.scss";
+import { Link } from "react-router-dom";
 
 type TypeProps = {
     isOpen: boolean;
@@ -11,25 +12,25 @@ export const Dropdown = ({ isOpen }: TypeProps): ReactNode => {
             <div className={`dropdown ${isOpen ? "dropdown_active" : ""}`}>
                 <ul className="header__dropdown">
                     <li className="header__dropdown-item">
-                        <a href="/me" className="header__dropdown-link">
+                        <Link to="/me" className="header__dropdown-link">
                             Мои данные
-                        </a>
+                        </Link>
                     </li>
                     <li className="header__dropdown-item">
-                        <a href="/me/requests" className="header__dropdown-link">
+                        <Link to="/me/requests" className="header__dropdown-link">
                             Мои заявки
-                        </a>
+                        </Link>
                     </li>
                     <li className="header__dropdown-item">
-                        <a href="/me/new-request" className="header__dropdown-link">
+                        <Link to="/me/new-request" className="header__dropdown-link">
                             Новая заявка
-                        </a>
+                        </Link>
                     </li>
                     <hr className="header__dropdown-hr" />
                     <li className="header__dropdown-item">
-                        <a href="/me/logout" className="header__dropdown-link">
+                        <Link to="/me/logout" className="header__dropdown-link">
                             Выход
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </div>

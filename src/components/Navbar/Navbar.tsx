@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { Dropdown } from "../Dropdown/Dropdown";
 import "./scss/Navbar.scss";
+import { Link } from "react-router-dom";
 
 type TypeProps = {
     dropdown: {
@@ -15,9 +16,9 @@ export const Navbar = ({ dropdown, children }: TypeProps): ReactNode => {
         <nav className="header__nav">
             <ul className="header__list">
                 <li className="header__item">
-                    <a href="/" className="header__link">
+                    <Link to="/" className="header__link">
                         Главная
-                    </a>
+                    </Link>
                 </li>
                 {children}
                 <li className="header__item">

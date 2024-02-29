@@ -1,5 +1,6 @@
 @import "../../../scss/mixins/flex-mixin.scss";
 @import "../../../scss/mixins/transition-mixin.scss";
+@import "../../../scss/mixins/visually-hidden-mixin.scss";
 @import "../../../scss/variables/global-variables.scss";
 @import "../../../scss/variables/colors-variables.scss";
 
@@ -93,7 +94,16 @@
 
     padding: 10px 15px;
 
-    &--save:hover {
+    &--save:not([disabled]):hover {
         background-color: $green-light;
+    }
+}
+
+.profile__input-error {
+    @include visualy-hidden($position: static);
+    color: $red;
+
+    &--active {
+        @include visualy-hidden-active($position: static);
     }
 }
