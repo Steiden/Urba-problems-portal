@@ -8,5 +8,6 @@
     right: 0;
     bottom: 0;
     background-color: $black-extra-transparent;
+    backdrop-filter: blur(2px);
     z-index: $z-index-100;
 }

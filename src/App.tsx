@@ -28,7 +28,7 @@ export const App = (): ReactNode => {
                 <Routes>
                     <Route path="/" Component={MainPage} />
                     <Route path="/problems" Component={ProblemsPage} />
-                    <Route Component={PageNotFound}/>
+                    <Route path="*" Component={PageNotFound}/>
                 </Routes>
             </Main>
         </Router>

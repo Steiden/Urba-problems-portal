@@ -11,23 +11,23 @@ export const Dropdown = ({ isOpen }: TypeProps): ReactNode => {
             <div className={`dropdown ${isOpen ? "dropdown_active" : ""}`}>
                 <ul className="header__dropdown">
                     <li className="header__dropdown-item">
-                        <a href="#" className="header__dropdown-link">
+                        <a href="/me" className="header__dropdown-link">
                             Мои данные
                         </a>
                     </li>
                     <li className="header__dropdown-item">
-                        <a href="#" className="header__dropdown-link">
+                        <a href="/me/requests" className="header__dropdown-link">
                             Мои заявки
                         </a>
                     </li>
                     <li className="header__dropdown-item">
-                        <a href="#" className="header__dropdown-link">
+                        <a href="/me/new-request" className="header__dropdown-link">
                             Новая заявка
                         </a>
                     </li>
                     <hr className="header__dropdown-hr" />
                     <li className="header__dropdown-item">
-                        <a href="#" className="header__dropdown-link">
+                        <a href="/me/logout" className="header__dropdown-link">
                             Выход
                         </a>
                     </li>
