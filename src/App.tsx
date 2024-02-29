@@ -7,6 +7,7 @@ import { Header } from "./components/Header/Header";
 import "./App.scss";
 import { ProfilePage } from "./components/ProfilePage";
 import { RequestsPage } from "./components/RequstsPage";
+import { NewRequestPage } from "./components/NewRequestPage";
 
 export const App = (): ReactNode => {
     useEffect(() => {
@@ -32,6 +33,7 @@ export const App = (): ReactNode => {
                     <Route path="/problems" Component={ProblemsPage} />
                     <Route path="/me" Component={ProfilePage} />
                     <Route path="/me/requests" Component={RequestsPage} />
+                    <Route path="/me/new-request" Component={NewRequestPage} />
                     <Route path="*" Component={PageNotFound}/>
                 </Routes>
             </Main>
