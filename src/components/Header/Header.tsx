@@ -2,8 +2,8 @@ import { ReactNode, useState } from "react";
 import { Navbar } from "../Navbar/Navbar";
 import { LoginForm } from "../AuthForm/LoginForm";
 import { RegisterForm } from "../AuthForm/RegisterForm";
-import "./scss/Header.scss";
 import { Link } from "react-router-dom";
+import "./scss/Header.scss";
 
 export const Header = (): ReactNode => {
     const [loginFormIsOpen, setLoginFormIsOpen] = useState(false);

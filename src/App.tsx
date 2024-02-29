@@ -1,6 +1,6 @@
 import { ReactNode, useEffect } from "react";
 import { MainPage } from "./components/MainPage";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
 import { ProblemsPage } from "./components/ProblemsPage";
 import { Main } from "./components/Main/Main";
 import { Header } from "./components/Header/Header";

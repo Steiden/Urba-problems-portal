@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { Dropdown } from "../Dropdown/Dropdown";
-import "./scss/Navbar.scss";
 import { Link } from "react-router-dom";
+import "./scss/Navbar.scss";
 
 type TypeProps = {
     dropdown: {
