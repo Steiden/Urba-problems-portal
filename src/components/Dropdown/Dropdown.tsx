@@ -17,6 +17,11 @@ export const Dropdown = ({ isOpen }: TypeProps): ReactNode => {
                     </li>
                     <li className="header__dropdown-item">
                         <a href="#" className="header__dropdown-link">
+                            Мои заявки
+                        </a>
+                    </li>
+                    <li className="header__dropdown-item">
+                        <a href="#" className="header__dropdown-link">
                             Новая заявка
                         </a>
                     </li>

@@ -1,14 +1,12 @@
-import { useState, useEffect } from "react";
-import { Header } from "./components/Header/Header";
+import { ReactNode, useEffect } from "react";
+import { MainPage } from "./components/MainPage";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { ProblemsPage } from "./components/ProblemsPage";
 import { Main } from "./components/Main/Main";
-import { LoginForm } from "./components/AuthForm/LoginForm";
-import { RegisterForm } from "./components/AuthForm/RegisterForm";
+import { Header } from "./components/Header/Header";
 import "./App.scss";
 
-function App() {
-    const [loginFormIsOpen, setLoginFormIsOpen] = useState(false);
-    const [registerFormIsOpen, setRegisterFormIsOpen] = useState(false);
-
+export const App = (): ReactNode => {
     useEffect(() => {
         const title: HTMLHeadElement = document.querySelector("title") as HTMLHeadElement;
         title.textContent = "Городские проблемы";
@@ -22,18 +20,19 @@ function App() {
         head.appendChild(link);
     }, []);
 
+    const PageNotFound = (): ReactNode => <h1>Страница не найдена</h1>
     return (
-        <>
-            <Header
-                loginForm={{ loginFormIsOpen, setLoginFormIsOpen }}
-                registerForm={{ registerFormIsOpen, setRegisterFormIsOpen }}
-            />
-            <Main />
-
-            <LoginForm loginForm={{ loginFormIsOpen, setLoginFormIsOpen }} />
-            <RegisterForm registerForm={{ registerFormIsOpen, setRegisterFormIsOpen }} />
-        </>
+        <Router>
+            <Header />
+            <Main>
+                <Routes>
+                    <Route path="/" Component={MainPage} />
+                    <Route path="/problems" Component={ProblemsPage} />
+                    <Route Component={PageNotFound}/>
+                </Routes>
+            </Main>
+        </Router>
     );
-}
+};
 
 export default App;

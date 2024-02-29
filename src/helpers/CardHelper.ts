@@ -9,3 +9,11 @@ export const ProblemStatus: Record<EnumProblemStatus, string> = {
     [EnumProblemStatus.solved]: "solved",
     [EnumProblemStatus.closed]: "closed",
 }
+
+export type TypeProblemCard = {
+    status: EnumProblemStatus;
+    title: string;
+    description: string;
+    imageSource: string;
+    date: Date;
+}
