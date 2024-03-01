@@ -1,4 +1,5 @@
 @import "../../../scss/mixins/flex-mixin.scss";
+@import "../../../scss/mixins/transition-mixin.scss";
 @import "../../../scss/variables/global-variables.scss";
 
 .main__card {
@@ -35,6 +36,10 @@
     background-color: $red;
 }
 
+.main__card-img-container {
+    position: relative;
+}
+
 .main__card-img {
 }
 
@@ -47,4 +52,26 @@
 }
 
 .main__card-text {
+}
+
+.main__card-edit-button {
+    @include transition-custom($property: background-color, $duration: .1s);
+
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+
+    background-color: $white;
+    border: $border;
+    border-radius: 50%;
+
+    padding: 5px;
+
+    &:hover {
+        background-color: $gray;
+    }
+}
+
+.main__card-edit {
+
 }

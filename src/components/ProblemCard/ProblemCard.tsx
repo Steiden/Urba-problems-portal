@@ -9,13 +9,35 @@ type TypeProps = {
     description: string;
     imageSource: string;
     date: Date;
+    editable: boolean;
 };
 
-export const ProblemCard = ({ status, title, description, imageSource, date }: TypeProps): ReactNode => {
+export const ProblemCard = ({ status, title, description, imageSource, date, editable }: TypeProps): ReactNode => {
     return (
         <article className="main__card">
             <span className={`main__card-label main__card-label_${ProblemStatus[status]}`}>{status}</span>
-            <img className="main__card-img" src={imageSource} alt="problem" width="400" height="350" loading="lazy" />
+            <div className="main__card-img-container">
+                <img
+                    className="main__card-img"
+                    src={imageSource}
+                    alt="problem"
+                    width="400"
+                    height="350"
+                    loading="lazy"
+                />
+                {editable && (
+                    <button className="main__card-edit-button" onClick={() => {}}>
+                        <img
+                            className="main__card-edit"
+                            src="/img/delete.svg"
+                            alt="edit"
+                            width="30"
+                            height="30"
+                            loading="lazy"
+                        />
+                    </button>
+                )}
+            </div>
             <div className="main__card-content">
                 <h3 className="main__card-title">{title}</h3>
                 <p className="main__card-text">{description}</p>

@@ -22,6 +22,6 @@ export const RequestsPage = (): ReactNode => {
     ];
 
     return (
-        <ProblemsList data={data} title="Мои заявки" />
+        <ProblemsList data={data} title="Мои заявки" editable={true} />
     ) 
 }

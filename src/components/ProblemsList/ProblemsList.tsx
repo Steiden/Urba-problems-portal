@@ -6,9 +6,10 @@ import "./scss/ProblemsList.scss";
 type TypeProps = {
     data: TypeProblemCard[];
     title: string;
+    editable: boolean;
 }
 
-export const ProblemsList = ({ data, title }: TypeProps): ReactNode => {
+export const ProblemsList = ({ data, title, editable }: TypeProps): ReactNode => {
 
     return (
         <section className="main__problems">
@@ -22,6 +23,7 @@ export const ProblemsList = ({ data, title }: TypeProps): ReactNode => {
                     description={item.description}
                     imageSource={item.imageSource}
                     date={item.date}
+                    editable={editable}
                 />
             ))}
             </div>
