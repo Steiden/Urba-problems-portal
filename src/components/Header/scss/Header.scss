@@ -5,10 +5,11 @@
 .header {
     position: relative;
     border-bottom: $border-bottom;
+    min-height: $header-min-height;
 }
 
 .header__container {
-    @include flex-justify(space-between, row, 10px);
+    @include flex-justify-align(space-between, center, row, 10px);
     padding-block: 0;
 
     position: relative;

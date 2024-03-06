@@ -1,56 +1,41 @@
-import { ReactNode } from "react";
+import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
 import { ProblemsList } from "./ProblemsList/ProblemsList";
-import { EnumProblemStatus, TypeProblemCard } from "../helpers/CardHelper";
+import { TypeProblemCard } from "../api/types/DatabaseTypes";
+import { getData } from "../api/Data";
+import { endpoints_basic } from "../api/config";
+import { TypeDataToGet } from "../api/types/RequestTypes";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
-export const ProblemsPage = (): ReactNode => {
-    const data: TypeProblemCard[] = [
-        {
-            status: EnumProblemStatus.closed,
-            title: "Проблема No1",
-            description: "Описание проблемы No1",
-            imageSource: "/img/problem1.jpeg",
-            date: new Date(),
-        },
-        {
-            status: EnumProblemStatus.new,
-            title: "Проблема No2",
-            description: "Описание проблемы No2",
-            imageSource: "/img/problem5.jpeg",
-            date: new Date(),
-        },
-        {
-            status: EnumProblemStatus.solved,
-            title: "Проблема No3",
-            description: "Описание проблемы No3",
-            imageSource: "/img/problem3.jpeg",
-            date: new Date(),
-        },
-        {
-            status: EnumProblemStatus.solved,
-            title: "Проблема No4",
-            description: "Описание проблемы No4",
-            imageSource: "/img/problem4.jpeg",
-            date: new Date(),
-        },
-        {
-            status: EnumProblemStatus.closed,
-            title: "Проблема No5",
-            description: "Описание проблемы No5",
-            imageSource: "/img/problem6.jpeg",
-            date: new Date(),
-        },
-        {
-            status: EnumProblemStatus.new,
-            title: "Проблема No6",
-            description: "Описание проблемы No6",
-            imageSource: "/img/decision1.jpeg",
-            date: new Date(),
-        },
-    ];
+type TypeProps = {
+    isAuthorized: boolean;
+}
+
+export const ProblemsPage = ({ isAuthorized }: TypeProps): ReactNode => {
+    const [problemsList, setProblemsList]: [TypeProblemCard[], Dispatch<SetStateAction<TypeProblemCard[]>>] = useState([]);
+
+    const navigate: NavigateFunction = useNavigate();
+
+    useEffect(() => {
+
+        if(!isAuthorized) {
+            navigate('/');
+            return;
+        }
+
+        async function getProblems(): Promise<void> {
+            const data: TypeDataToGet = await getData(endpoints_basic.problems);
+
+            if(data instanceof Error) return;
+
+            setProblemsList(data as TypeProblemCard[]);
+        }
+
+        getProblems();
+    }, []);
 
     return (
         <>
-            <ProblemsList data={data} title="Городские проблемы" />
+            <ProblemsList data={problemsList} title="Городские проблемы" editable={false} />
         </>
     );
 };

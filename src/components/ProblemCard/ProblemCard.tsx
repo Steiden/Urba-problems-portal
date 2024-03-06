@@ -1,32 +1,38 @@
 import { ReactNode } from "react";
-import { EnumProblemStatus } from "../../helpers/CardHelper";
+import { TypeProblemCard } from "../../api/types/DatabaseTypes";
 import { ProblemStatus } from "../../helpers/CardHelper";
 import "./scss/ProblemCard.scss";
 
 type TypeProps = {
-    status: EnumProblemStatus;
-    title: string;
-    description: string;
-    imageSource: string;
-    date: Date;
+    problemCard: TypeProblemCard;
     editable: boolean;
 };
 
-export const ProblemCard = ({ status, title, description, imageSource, date, editable }: TypeProps): ReactNode => {
+export const ProblemCard = ({
+    problemCard,
+    editable,
+}: TypeProps): ReactNode => {
     return (
         <article className="main__card">
-            <span className={`main__card-label main__card-label_${ProblemStatus[status]}`}>{status}</span>
+            <span
+                className={`main__card-label ${`main__card-label_${ProblemStatus[problemCard.status.name]}`}`}
+            >
+                {problemCard.status.name}
+            </span>
             <div className="main__card-img-container">
                 <img
                     className="main__card-img"
-                    src={imageSource}
+                    src={problemCard.image}
                     alt="problem"
                     width="400"
                     height="350"
                     loading="lazy"
                 />
                 {editable && (
-                    <button className="main__card-edit-button" onClick={() => {}}>
+                    <button
+                        className="main__card-edit-button"
+                        onClick={() => {}}
+                    >
                         <img
                             className="main__card-edit"
                             src="/img/delete.svg"
@@ -39,10 +45,15 @@ export const ProblemCard = ({ status, title, description, imageSource, date, edi
                 )}
             </div>
             <div className="main__card-content">
-                <h3 className="main__card-title">{title}</h3>
-                <p className="main__card-text">{description}</p>
+                <h3 className="main__card-title">{problemCard.title}</h3>
+                <p className="main__card-text">{problemCard.description}</p>
                 <p className="main__card-text">
-                    Дата: <time>{date.toLocaleDateString()}</time>
+                    Дата:{" "}
+                    <time>
+                        {Intl.DateTimeFormat("ru").format(
+                            new Date(problemCard.created_at)
+                        )}
+                    </time>
                 </p>
             </div>
         </article>

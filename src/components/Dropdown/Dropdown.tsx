@@ -1,12 +1,21 @@
-import { ReactNode } from "react";
-import "./scss/Dropdown.scss";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 import { Link } from "react-router-dom";
+import { removeJWT } from "../../helpers/jwtHelper";
+import "./scss/Dropdown.scss";
 
 type TypeProps = {
     isOpen: boolean;
+    setIsAthorized: Dispatch<SetStateAction<boolean>>;
+    setJwt: Dispatch<SetStateAction<string>>;
 };
 
-export const Dropdown = ({ isOpen }: TypeProps): ReactNode => {
+export const Dropdown = ({ isOpen, setIsAthorized, setJwt }: TypeProps): ReactNode => {
+    const handleLogout = (): void => {
+        setIsAthorized(false);
+        setJwt("");
+        removeJWT();
+    };
+
     return (
         <>
             <div className={`dropdown ${isOpen ? "dropdown_active" : ""}`}>
@@ -28,9 +37,9 @@ export const Dropdown = ({ isOpen }: TypeProps): ReactNode => {
                     </li>
                     <hr className="header__dropdown-hr" />
                     <li className="header__dropdown-item">
-                        <Link to="/me/logout" className="header__dropdown-link">
+                        <button className="header__dropdown-link" onClick={handleLogout}>
                             Выход
-                        </Link>
+                        </button>
                     </li>
                 </ul>
             </div>
