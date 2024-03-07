@@ -1,20 +1,41 @@
-import { ReactNode, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { Dispatch, FormEvent, ReactNode, SetStateAction, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { TypeUser } from "../../api/types/DatabaseTypes";
+import { putData } from "../../api/Data";
+import { endpoints_current } from "../../api/config";
+import { getJWT } from "../../helpers/jwtHelper";
+import { TypeDataFromPut } from "../../api/types/RequestTypes";
 import "./scss/Profile.scss";
 
-export const Profile = (): ReactNode => {
-    const [secondName, setSecondName] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [patronymic, setPatronymic] = useState("");
-    const [login, setLogin] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+type TypeProps = {
+    user: {
+        user: TypeUser;
+        setUser: Dispatch<SetStateAction<TypeUser>>;
+    }
+};
+
+export const Profile = ({ user }: TypeProps): ReactNode => {
+    const [userData, setUserData] = useState({ ...user.user, new_password: "" });
 
     const navigate = useNavigate();
 
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+        e.preventDefault();
+
+        if(userData.new_password) {
+            userData.password = userData.new_password;
+        }
+
+        const userUpdated: TypeDataFromPut = await putData(endpoints_current.user(user.user.id), userData, getJWT());
+
+        if(userUpdated instanceof Error) return;
+
+        user.setUser(userUpdated);
+    };
+
     return (
         <section className="profile">
-            <form action="/me/update" method="POST" className="profile__form">
+            <form className="profile__form" onSubmit={handleSubmit}>
                 <div className="profile__inputs-container profile__inputs-container--horizontal">
                     <div className="profile__input-container">
                         <label htmlFor="secondName" className="profile__label">
@@ -24,10 +45,13 @@ export const Profile = (): ReactNode => {
                             type="text"
                             id="secondName"
                             className="profile__input"
-                            value={secondName}
-                            onChange={(e) => setSecondName(e.target.value)}
+                            value={userData.second_name}
+                            onChange={(e) => setUserData({ ...userData, second_name: e.target.value })}
                         />
-                        <span className={`profile__input-error ${!secondName && "profile__input-error--active"}`}>
+                        <span
+                            className={`profile__input-error ${
+                                !userData.second_name && "profile__input-error--active"
+                            }`}>
                             *Заполните поле фамилии
                         </span>
                     </div>
@@ -39,10 +63,13 @@ export const Profile = (): ReactNode => {
                             type="text"
                             id="firstName"
                             className="profile__input"
-                            value={firstName}
-                            onChange={(e) => setFirstName(e.target.value)}
+                            value={userData.first_name}
+                            onChange={(e) => setUserData({ ...userData, first_name: e.target.value })}
                         />
-                        <span className={`profile__input-error ${!firstName && "profile__input-error--active"}`}>
+                        <span
+                            className={`profile__input-error ${
+                                !userData.first_name && "profile__input-error--active"
+                            }`}>
                             *Заполните поле имени
                         </span>
                     </div>
@@ -54,10 +81,13 @@ export const Profile = (): ReactNode => {
                             type="text"
                             id="patronymic"
                             className="profile__input"
-                            value={patronymic}
-                            onChange={(e) => setPatronymic(e.target.value)}
+                            value={userData.patronymic}
+                            onChange={(e) => setUserData({ ...userData, patronymic: e.target.value })}
                         />
-                        <span className={`profile__input-error ${!patronymic && "profile__input-error--active"}`}>
+                        <span
+                            className={`profile__input-error ${
+                                !userData.patronymic && "profile__input-error--active"
+                            }`}>
                             *Заполните поле отчества
                         </span>
                     </div>
@@ -72,10 +102,11 @@ export const Profile = (): ReactNode => {
                                 type="text"
                                 id="login"
                                 className="profile__input"
-                                value={login}
-                                onChange={(e) => setLogin(e.target.value)}
+                                value={userData.login}
+                                onChange={(e) => setUserData({ ...userData, login: e.target.value })}
                             />
-                            <span className={`profile__input-error ${!login && "profile__input-error--active"}`}>
+                            <span
+                                className={`profile__input-error ${!userData.login && "profile__input-error--active"}`}>
                                 *Заполните поле логина
                             </span>
                         </div>
@@ -87,25 +118,29 @@ export const Profile = (): ReactNode => {
                                 type="email"
                                 id="email"
                                 className="profile__input"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                value={userData.email}
+                                onChange={(e) => setUserData({ ...userData, email: e.target.value })}
                             />
-                            <span className={`profile__input-error ${!email && "profile__input-error--active"}`}>
+                            <span
+                                className={`profile__input-error ${!userData.email && "profile__input-error--active"}`}>
                                 *Заполните поле почты
                             </span>
                         </div>
                         <div className="profile__input-container">
                             <label htmlFor="password" className="profile__label">
-                                Пароль
+                                Новый пароль
                             </label>
                             <input
                                 type="password"
                                 id="password"
                                 className="profile__input"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                value={userData.new_password}
+                                onChange={(e) => setUserData({ ...userData, new_password: e.target.value })}
                             />
-                            <span className={`profile__input-error ${!password && "profile__input-error--active"}`}>
+                            <span
+                                className={`profile__input-error ${
+                                    !userData.password && "profile__input-error--active"
+                                }`}>
                                 *Заполните поле пароля
                             </span>
                         </div>
@@ -125,10 +160,21 @@ export const Profile = (): ReactNode => {
                     <button
                         className="profile__button profile__button--save"
                         type="submit"
-                        disabled={!secondName || !firstName || !patronymic || !login || !email || !password}>
+                        disabled={
+                            !userData.second_name ||
+                            !userData.first_name ||
+                            !userData.patronymic ||
+                            !userData.login ||
+                            !userData.email
+                        }>
                         Сохранить изменения
                     </button>
-                    <button className="profile__button" type="button" onClick={() => {navigate('/')}}>
+                    <button
+                        className="profile__button"
+                        type="button"
+                        onClick={() => {
+                            navigate("/");
+                        }}>
                         Отмена
                     </button>
                 </div>

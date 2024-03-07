@@ -12,5 +12,18 @@
 }
 
 .main__cards-container {
-    @include grid-column($columns: 3, $gap: 50px);
+    @include grid-column($columns: 3, $gap: clamp(10px, 3vw, 50px));
+}
+
+@media screen and (max-width: 800px) {
+    .main__cards-container {
+        @include grid-column($columns: 2, $gap: clamp(10px, 3vw, 50px));
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .main__cards-container {
+        @include grid-column($columns: 1, $gap: clamp(10px, 3vw, 50px));
+        padding-inline: 20px;
+    }
 }

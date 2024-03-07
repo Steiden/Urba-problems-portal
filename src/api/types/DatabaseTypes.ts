@@ -10,6 +10,7 @@ export type TypeUser = {
     patronymic: string;
     login: string;
     email: string;
+    password: string;
     role: TypeRole;
 }
 

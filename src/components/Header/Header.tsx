@@ -9,6 +9,14 @@ import { TypeUser } from "../../api/types/DatabaseTypes";
 import "./scss/Header.scss";
 
 type TypeProps = {
+    loginForm: {
+        loginFormIsOpen: boolean;
+        setLoginFormIsOpen: Dispatch<SetStateAction<boolean>>;
+    };
+    registerForm: {
+        registerFormIsOpen: boolean;
+        setRegisterFormIsOpen: Dispatch<SetStateAction<boolean>>;
+    }
     auth: {
         isAuthorized: boolean;
         setIsAuthorized: Dispatch<SetStateAction<boolean>>;
@@ -17,9 +25,7 @@ type TypeProps = {
     setJwt: Dispatch<SetStateAction<string>>;
 };
 
-export const Header = ({ auth, user, setJwt }: TypeProps): ReactNode => {
-    const [loginFormIsOpen, setLoginFormIsOpen] = useState(false);
-    const [registerFormIsOpen, setRegisterFormIsOpen] = useState(false);
+export const Header = ({ loginForm, registerForm, auth, user, setJwt }: TypeProps): ReactNode => {
     const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
 
     return (
@@ -37,8 +43,8 @@ export const Header = ({ auth, user, setJwt }: TypeProps): ReactNode => {
                         <UserNavbarItems />
                     ) : (
                         <GuestNavbarItems
-                            setLoginFormIsOpen={setLoginFormIsOpen}
-                            setRegisterFormIsOpen={setRegisterFormIsOpen}
+                            setLoginFormIsOpen={loginForm.setLoginFormIsOpen}
+                            setRegisterFormIsOpen={registerForm.setRegisterFormIsOpen}
                         />
                     )}
                 </Navbar>
@@ -46,12 +52,12 @@ export const Header = ({ auth, user, setJwt }: TypeProps): ReactNode => {
             {dropdownIsOpen && <div className="dropdown__overlay" onClick={() => setDropdownIsOpen(false)}></div>}
 
             <LoginForm
-                loginForm={{ loginFormIsOpen, setLoginFormIsOpen }}
+                loginForm={loginForm}
                 setIsAuthorized={auth.setIsAuthorized}
                 setJwt={setJwt}
                 setDropdownIsOpen={setDropdownIsOpen}
             />
-            <RegisterForm registerForm={{ registerFormIsOpen, setRegisterFormIsOpen }} />
+            <RegisterForm registerForm={registerForm} />
         </header>
     );
 };

@@ -1,7 +1,7 @@
 @import "./colors-variables";
 
 // Паддинг контейнера
-$container-padding: 0 150px;
+$container-padding-inline: clamp(10px, 5vw, 150px);
 
 // Рамка
 $border: 1px solid $black;

@@ -10,11 +10,14 @@ import { NewRequestPage } from "./components/NewRequestPage";
 import { postData } from "./api/Data";
 import { endpoints_auth } from "./api/config";
 import { getJWT } from "./helpers/jwtHelper";
-import { TypeDataToComePost } from "./api/types/RequestTypes";
 import { TypeUser } from "./api/types/DatabaseTypes";
+import { TypeDataFromPost } from "./api/types/RequestTypes";
 import "./App.scss";
 
 export const App = (): ReactNode => {
+    const [loginFormIsOpen, setLoginFormIsOpen]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);
+    const [registerFormIsOpen, setRegisterFormIsOpen]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);
+
     const [isAuthorized, setIsAuthorized]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);
     const [user, setUser]: [TypeUser, Dispatch<SetStateAction<TypeUser>>] = useState({} as TypeUser);
     const [jwt, setJwt]: [string, Dispatch<SetStateAction<string>>] = useState("");
@@ -34,7 +37,7 @@ export const App = (): ReactNode => {
 
     useEffect(() => {
         setJwt(getJWT());
-    }, [])
+    }, []);
 
     useEffect(() => {
         async function checkAuth(): Promise<void> {
@@ -44,7 +47,7 @@ export const App = (): ReactNode => {
                 return;
             }
 
-            const user: TypeDataToComePost = await postData(
+            const user: TypeDataFromPost = await postData(
                 endpoints_auth.me,
                 {
                     login: "",
@@ -65,12 +68,27 @@ export const App = (): ReactNode => {
     const PageNotFound = (): ReactNode => <h1>Страница не найдена</h1>;
     return (
         <Router>
-            <Header auth={{ isAuthorized, setIsAuthorized }} user={user} setJwt={setJwt}/>
+            <Header
+                loginForm={{ loginFormIsOpen, setLoginFormIsOpen }}
+                registerForm={{ registerFormIsOpen, setRegisterFormIsOpen }}
+                auth={{ isAuthorized, setIsAuthorized }}
+                user={user}
+                setJwt={setJwt}
+            />
             <Main>
                 <Routes>
-                    <Route path="/" Component={MainPage} />
+                    <Route
+                        path="/"
+                        element={
+                            <MainPage
+                                loginForm={{ isOpen: loginFormIsOpen, setIsOpen: setLoginFormIsOpen }}
+                                registerForm={{ isOpen: registerFormIsOpen, setIsOpen: setRegisterFormIsOpen }}
+                                isAuthorized={isAuthorized}
+                            />
+                        }
+                    />
                     <Route path="/problems" element={<ProblemsPage isAuthorized={isAuthorized} />} />
-                    <Route path="/me" Component={ProfilePage} />
+                    <Route path="/me" element={<ProfilePage user={{ user, setUser }} />} />
                     <Route path="/me/requests" element={<RequestsPage isAuthorized={isAuthorized} user={user} />} />
                     <Route path="/me/new-request" Component={NewRequestPage} />
                     <Route path="*" Component={PageNotFound} />

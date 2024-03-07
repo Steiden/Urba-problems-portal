@@ -15,10 +15,14 @@ export type TypeDataToCome = {
     data: TypeDataToGet;
 };
 
-export type TypeDataToPost = {
+export type TypeLoginData = {
     login: string;
     password: string;
 }
+
+export type TypeDataToPost = TypeLoginData | TypeUser | TypeProblemCard;
+
+export type TypeDataToPut = TypeUser;
 
 export type TypeAuthData = {
     access_token: string;
@@ -26,4 +30,5 @@ export type TypeAuthData = {
     expires_in: number;
 }
 
-export type TypeDataToComePost = TypeAuthData | TypeUser | Error;
+export type TypeDataFromPost = TypeAuthData | TypeUser | Error;
+export type TypeDataFromPut = TypeUser | Error;
