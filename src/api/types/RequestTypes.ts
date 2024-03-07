@@ -1,4 +1,5 @@
-import { TypeProblemCard, TypeRole, TypeStatus, TypeUser } from "./DatabaseTypes";
+import { TypeUser } from "../users/UsersTypes";
+import { TypeProblemCard, TypeRole, TypeStatus } from "./DatabaseTypes";
 
 export type TypeDataToGet =
     | TypeRole[]

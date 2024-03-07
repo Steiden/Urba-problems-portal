@@ -1,15 +1,15 @@
 import { Dispatch, ReactNode, SetStateAction } from "react";
 import { Dropdown } from "../Dropdown/Dropdown";
 import { Link } from "react-router-dom";
+import { TypeUserFromServer } from "../../api/users/UsersTypes";
 import "./scss/Navbar.scss";
-import { TypeUser } from "../../api/types/DatabaseTypes";
 
 type TypeProps = {
     dropdown: {
         dropdownIsOpen: boolean;
         setDropdownIsOpen: Dispatch<SetStateAction<boolean>>;
     };
-    user: TypeUser;
+    user: TypeUserFromServer;
     setIsAuthorized: Dispatch<SetStateAction<boolean>>;
     setJwt: Dispatch<SetStateAction<string>>;
     children: ReactNode;

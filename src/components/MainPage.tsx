@@ -19,7 +19,7 @@ type TypeProps = {
 
 export const MainPage = ({ loginForm, registerForm, isAuthorized }: TypeProps): ReactNode => {
     const [problemsCards, setProblemsCards]: [TypeProblemCard[], Dispatch<SetStateAction<TypeProblemCard[]>>] =
-        useState([]);
+        useState([] as TypeProblemCard[]);
 
     useEffect(() => {
         async function getProblems(): Promise<void> {

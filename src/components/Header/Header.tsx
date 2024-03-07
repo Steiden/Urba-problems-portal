@@ -5,8 +5,8 @@ import { RegisterForm } from "../AuthForm/RegisterForm";
 import { Link } from "react-router-dom";
 import { GuestNavbarItems } from "../GuestNavbarItems";
 import { UserNavbarItems } from "../UserNavbarItems";
-import { TypeUser } from "../../api/types/DatabaseTypes";
 import "./scss/Header.scss";
+import { TypeUserFromServer } from "../../api/users/UsersTypes";
 
 type TypeProps = {
     loginForm: {
@@ -21,7 +21,7 @@ type TypeProps = {
         isAuthorized: boolean;
         setIsAuthorized: Dispatch<SetStateAction<boolean>>;
     };
-    user: TypeUser;
+    user: TypeUserFromServer;
     setJwt: Dispatch<SetStateAction<string>>;
 };
 

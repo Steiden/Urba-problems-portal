@@ -7,11 +7,9 @@ import { Header } from "./components/Header/Header";
 import { ProfilePage } from "./components/ProfilePage";
 import { RequestsPage } from "./components/RequstsPage";
 import { NewRequestPage } from "./components/NewRequestPage";
-import { postData } from "./api/Data";
-import { endpoints_auth } from "./api/config";
 import { getJWT } from "./helpers/jwtHelper";
-import { TypeUser } from "./api/types/DatabaseTypes";
-import { TypeDataFromPost } from "./api/types/RequestTypes";
+import { TypeUserFromServer } from "./api/users/UsersTypes";
+import { getMe } from "./api/auth/Auth";
 import "./App.scss";
 
 export const App = (): ReactNode => {
@@ -19,7 +17,7 @@ export const App = (): ReactNode => {
     const [registerFormIsOpen, setRegisterFormIsOpen]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);
 
     const [isAuthorized, setIsAuthorized]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);
-    const [user, setUser]: [TypeUser, Dispatch<SetStateAction<TypeUser>>] = useState({} as TypeUser);
+    const [user, setUser]: [TypeUserFromServer, Dispatch<SetStateAction<TypeUserFromServer>>] = useState({} as TypeUserFromServer);
     const [jwt, setJwt]: [string, Dispatch<SetStateAction<string>>] = useState("");
 
     useEffect(() => {
@@ -42,23 +40,16 @@ export const App = (): ReactNode => {
     useEffect(() => {
         async function checkAuth(): Promise<void> {
             if (!jwt) {
-                setUser({} as TypeUser);
+                setUser({} as TypeUserFromServer);
                 setIsAuthorized(false);
                 return;
             }
 
-            const user: TypeDataFromPost = await postData(
-                endpoints_auth.me,
-                {
-                    login: "",
-                    password: "",
-                },
-                jwt
-            );
+            const user: TypeUserFromServer = await getMe(getJWT()) as TypeUserFromServer;
 
             if (user instanceof Error) return;
 
-            setUser(user as TypeUser);
+            setUser(user as TypeUserFromServer);
             setIsAuthorized(true);
         }
 

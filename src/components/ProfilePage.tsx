@@ -1,11 +1,11 @@
 import { Dispatch, ReactNode, SetStateAction } from "react"
 import { Profile } from "./Profile/Profile"
-import { TypeUser } from "../api/types/DatabaseTypes"
+import { TypeUserFromServer } from "../api/users/UsersTypes"
 
 type TypeProps = {
     userData: {
-        user: TypeUser;
-        setUser: Dispatch<SetStateAction<TypeUser>>;
+        user: TypeUserFromServer;
+        setUser: Dispatch<SetStateAction<TypeUserFromServer>>;
     }
 }
 

@@ -1,18 +1,20 @@
+import { TypeUser } from "../users/UsersTypes";
+
 export type TypeRole = {
     id: number;
     name: string;
 }
 
-export type TypeUser = {
-    id: number;
-    second_name: string;
-    first_name: string;
-    patronymic: string;
-    login: string;
-    email: string;
-    password: string;
-    role: TypeRole;
-}
+// export type TypeUser = {
+//     id: number;
+//     second_name: string;
+//     first_name: string;
+//     patronymic: string;
+//     login: string;
+//     email: string;
+//     password: string;
+//     role: TypeRole;
+// }
 
 export type TypeStatus = {
     id: number;

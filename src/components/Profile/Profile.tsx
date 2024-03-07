@@ -1,21 +1,19 @@
 import { Dispatch, FormEvent, ReactNode, SetStateAction, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TypeUser } from "../../api/types/DatabaseTypes";
-import { putData } from "../../api/Data";
-import { endpoints_current } from "../../api/config";
 import { getJWT } from "../../helpers/jwtHelper";
-import { TypeDataFromPut } from "../../api/types/RequestTypes";
+import { TypeUser, TypeUserFromServer } from "../../api/users/UsersTypes";
+import { updateUser } from "../../api/users/Users";
 import "./scss/Profile.scss";
 
 type TypeProps = {
     userData: {
-        user: TypeUser;
-        setUser: Dispatch<SetStateAction<TypeUser>>;
+        user: TypeUserFromServer;
+        setUser: Dispatch<SetStateAction<TypeUserFromServer>>;
     };
 };
 
 type TypeUserDataToUpdate = {
-    user: TypeUser;
+    user: TypeUserFromServer;
     new_password: string;
 };
 
@@ -39,16 +37,19 @@ export const Profile = ({ userData }: TypeProps): ReactNode => {
             userDataToUpdate.user.password = userDataToUpdate.new_password;
         }
 
-        const userUpdated: TypeDataFromPut = await putData(endpoints_current.user(userData.user.id), userDataToUpdate.user, getJWT());
+        const userToUpdate: TypeUser = { ...userDataToUpdate.user, role_id: userDataToUpdate.user.role.id };
+
+        const userUpdated: TypeUserFromServer = await updateUser(userData.user.id, userToUpdate, getJWT()) as TypeUserFromServer;
 
         if (userUpdated instanceof Error) return;
 
         userData.setUser(userUpdated);
+        console.log(userData, userDataToUpdate);
     };
 
     return (
         <section className="profile">
-            {userDataToUpdate.user !== ({} as TypeUser) && (
+            {userDataToUpdate.user !== ({} as TypeUserFromServer) && (
                 <form className="profile__form" onSubmit={handleSubmit}>
                     <div className="profile__inputs-container profile__inputs-container--horizontal">
                         <div className="profile__input-container">
