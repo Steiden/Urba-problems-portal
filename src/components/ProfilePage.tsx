@@ -3,12 +3,12 @@ import { Profile } from "./Profile/Profile"
 import { TypeUser } from "../api/types/DatabaseTypes"
 
 type TypeProps = {
-    user: {
+    userData: {
         user: TypeUser;
         setUser: Dispatch<SetStateAction<TypeUser>>;
     }
 }
 
-export const ProfilePage = ({ user }: TypeProps): ReactNode => {
-    return <Profile user={user} />
+export const ProfilePage = ({ userData }: TypeProps): ReactNode => {
+    return <Profile userData={userData} />
 }

@@ -88,7 +88,7 @@ export const App = (): ReactNode => {
                         }
                     />
                     <Route path="/problems" element={<ProblemsPage isAuthorized={isAuthorized} />} />
-                    <Route path="/me" element={<ProfilePage user={{ user, setUser }} />} />
+                    <Route path="/me" element={<ProfilePage userData={{ user, setUser }} />} />
                     <Route path="/me/requests" element={<RequestsPage isAuthorized={isAuthorized} user={user} />} />
                     <Route path="/me/new-request" Component={NewRequestPage} />
                     <Route path="*" Component={PageNotFound} />
