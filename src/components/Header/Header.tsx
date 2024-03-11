@@ -5,8 +5,8 @@ import { RegisterForm } from "../AuthForm/RegisterForm";
 import { Link } from "react-router-dom";
 import { GuestNavbarItems } from "../GuestNavbarItems";
 import { UserNavbarItems } from "../UserNavbarItems";
-import "./scss/Header.scss";
 import { TypeUserFromServer } from "../../api/users/UsersTypes";
+import "./scss/Header.scss";
 
 type TypeProps = {
     loginForm: {

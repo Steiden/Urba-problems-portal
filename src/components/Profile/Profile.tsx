@@ -44,7 +44,6 @@ export const Profile = ({ userData }: TypeProps): ReactNode => {
         if (userUpdated instanceof Error) return;
 
         userData.setUser(userUpdated);
-        console.log(userData, userDataToUpdate);
     };
 
     return (

@@ -1,14 +1,13 @@
 import { Dispatch, FormEventHandler, ReactNode, SetStateAction, useState } from "react";
 import { AuthForm } from "./AuthForm";
-import { postData } from "../../api/Data";
-import { endpoints_auth } from "../../api/config";
-import { TypeAuthData, TypeDataToComePost } from "../../api/types/RequestTypes";
 import { getJWT, putJWT } from "../../helpers/jwtHelper";
+import { signIn } from "../../api/auth/Auth";
+import { TypeLoginData, TypeLoginDataToComeFromServer } from "../../api/auth/AuthTypes";
 
 type TypeProps = {
     loginForm: {
         loginFormIsOpen: boolean;
-        setLoginFormIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+        setLoginFormIsOpen: Dispatch<SetStateAction<boolean>>;
     };
     setIsAuthorized: Dispatch<SetStateAction<boolean>>;
     setJwt: Dispatch<SetStateAction<string>>;
@@ -16,16 +15,16 @@ type TypeProps = {
 };
 
 export const LoginForm = ({ loginForm, setIsAuthorized, setJwt, setDropdownIsOpen }: TypeProps): ReactNode => {
-    const [authData, setAuthData] = useState({ login: "", password: "" });
+    const [authData, setAuthData]: [TypeLoginData, Dispatch<SetStateAction<TypeLoginData>>] = useState({} as TypeLoginData);
 
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
 
-        const data: TypeDataToComePost = await postData(endpoints_auth.login, authData);
+        const data: TypeLoginDataToComeFromServer = await signIn(authData) as TypeLoginDataToComeFromServer;
 
         if (data instanceof Error) return;
 
-        putJWT((data as TypeAuthData).access_token);
+        putJWT(data.access_token);
         setJwt(getJWT());
         setIsAuthorized(true);
 

@@ -1,5 +1,7 @@
-import { ReactNode, useEffect, useState } from "react";
+import { FormEvent, FormEventHandler, ReactNode, useEffect, useState } from "react";
 import { AuthForm } from "./AuthForm";
+import { TypeUserFromServer } from "../../api/users/UsersTypes";
+import { signUp } from "../../api/auth/Auth";
 
 type TypeProps = {
     registerForm: {
@@ -17,6 +19,7 @@ export const RegisterForm = ({ registerForm }: TypeProps): ReactNode => {
     const [passwordCheck, setPasswordCheck] = useState("");
     const [consentIsChecked, setConsentIsChecked] = useState(true);
     // _____________________________________________
+
 
     // __________Корректность введенных данных____________
     const [isCorrectFio, setIsCorrectFio] = useState(true);
@@ -51,13 +54,32 @@ export const RegisterForm = ({ registerForm }: TypeProps): ReactNode => {
     }, [fio, login, email, password, passwordCheck, consentIsChecked]);
     // ______________________________________________________________
 
+
+    const handleSubmit: FormEventHandler<HTMLFormElement> = async (e: FormEvent) => {
+        e.preventDefault();
+
+        const user: TypeUserFromServer | Error = await signUp({
+            second_name: fio.split(" ")[0],
+            first_name: fio.split(" ")[1],
+            patronymic: fio.split(" ")[2],
+            login: login,
+            email: email,
+            password: password,
+        });
+
+        if(user instanceof Error) return;
+
+        registerForm.setRegisterFormIsOpen(false);
+    }
+
     return (
         <AuthForm
             authForm={{
                 authFormIsOpen: registerForm.registerFormIsOpen,
                 setAuthFormIsOpen: registerForm.setRegisterFormIsOpen,
             }}
-            title="Регистрация">
+            title="Регистрация"
+            onSubmit={handleSubmit}>
             <div className="auth__input-container">
                 <input
                     className="auth__input"

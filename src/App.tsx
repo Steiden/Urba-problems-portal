@@ -7,7 +7,7 @@ import { Header } from "./components/Header/Header";
 import { ProfilePage } from "./components/ProfilePage";
 import { RequestsPage } from "./components/RequstsPage";
 import { NewRequestPage } from "./components/NewRequestPage";
-import { getJWT } from "./helpers/jwtHelper";
+import { getJWT, removeJWT } from "./helpers/jwtHelper";
 import { TypeUserFromServer } from "./api/users/UsersTypes";
 import { getMe } from "./api/auth/Auth";
 import "./App.scss";
@@ -47,7 +47,12 @@ export const App = (): ReactNode => {
 
             const user: TypeUserFromServer = await getMe(getJWT()) as TypeUserFromServer;
 
-            if (user instanceof Error) return;
+            if (user instanceof Error) {
+                setUser({} as TypeUserFromServer);
+                setIsAuthorized(false);
+                removeJWT();
+                return;
+            }
 
             setUser(user as TypeUserFromServer);
             setIsAuthorized(true);
@@ -79,9 +84,9 @@ export const App = (): ReactNode => {
                         }
                     />
                     <Route path="/problems" element={<ProblemsPage isAuthorized={isAuthorized} />} />
-                    <Route path="/me" element={<ProfilePage userData={{ user, setUser }} />} />
+                    <Route path="/me" element={<ProfilePage userData={{ user, setUser }} isAuthorized={isAuthorized} />} />
                     <Route path="/me/requests" element={<RequestsPage isAuthorized={isAuthorized} user={user} />} />
-                    <Route path="/me/new-request" Component={NewRequestPage} />
+                    <Route path="/me/new-request" element={<NewRequestPage isAuthorized={isAuthorized} user={user} />} />
                     <Route path="*" Component={PageNotFound} />
                 </Routes>
             </Main>

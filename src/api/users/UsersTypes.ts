@@ -1,4 +1,4 @@
-import { TypeRole } from "../types/DatabaseTypes";
+import { TypeRole } from "../roles/RolesTypes";
 
 export type TypeUser = {
     id: number;

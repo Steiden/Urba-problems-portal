@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
-import { TypeProblemCard } from "../../api/types/DatabaseTypes";
 import { ProblemStatus } from "../../helpers/CardHelper";
+import { TypeProblemFromServer } from "../../api/problems/ProblemsTypes";
 import "./scss/ProblemCard.scss";
 
 type TypeProps = {
-    problemCard: TypeProblemCard;
+    problemCard: TypeProblemFromServer;
     editable: boolean;
 };
 

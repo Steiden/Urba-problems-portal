@@ -1,36 +1,38 @@
 import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
 import { ProblemsList } from "./ProblemsList/ProblemsList";
-import { TypeProblemCard } from "../api/types/DatabaseTypes";
-import { getData } from "../api/Data";
-import { endpoints_basic } from "../api/config";
-import { TypeDataToGet } from "../api/types/RequestTypes";
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import { getJWT } from "../helpers/jwtHelper";
+import { TypeProblemFromServer } from "../api/problems/ProblemsTypes";
+import { getProblems } from "../api/problems/Problems";
 
 type TypeProps = {
     isAuthorized: boolean;
-}
+};
 
 export const ProblemsPage = ({ isAuthorized }: TypeProps): ReactNode => {
-    const [problemsList, setProblemsList]: [TypeProblemCard[], Dispatch<SetStateAction<TypeProblemCard[]>>] = useState([]);
+    const [problemsList, setProblemsList]: [TypeProblemFromServer[], Dispatch<SetStateAction<TypeProblemFromServer[]>>] = useState(
+        [] as TypeProblemFromServer[]
+    );
 
     const navigate: NavigateFunction = useNavigate();
 
     useEffect(() => {
-
-        if(!isAuthorized) {
-            navigate('/');
+        if (!getJWT() && !isAuthorized) {
+            navigate("/");
             return;
         }
+    }, [isAuthorized]);
 
-        async function getProblems(): Promise<void> {
-            const data: TypeDataToGet = await getData(endpoints_basic.problems);
+    useEffect(() => {
+        async function getProblemsList(): Promise<void> {
+            const data: TypeProblemFromServer[] | Error = await getProblems();
 
-            if(data instanceof Error) return;
+            if (data instanceof Error) return;
 
-            setProblemsList(data as TypeProblemCard[]);
+            setProblemsList(data as TypeProblemFromServer[]);
         }
 
-        getProblems();
+        getProblemsList();
     }, []);
 
     return (

@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
 import { ProblemCard } from "../ProblemCard/ProblemCard";
-import { TypeProblemCard } from "../../api/types/DatabaseTypes";
+import { TypeProblemFromServer } from "../../api/problems/ProblemsTypes";
 import "./scss/ProblemsList.scss";
 
 type TypeProps = {
-    data: TypeProblemCard[];
+    data: TypeProblemFromServer[];
     title: string;
     editable: boolean;
 }
@@ -14,10 +14,10 @@ export const ProblemsList = ({ data, title, editable }: TypeProps): ReactNode =>
         <section className="main__problems">
             <h2 className="main__title-2">{title}</h2>
             <div className="main__cards-container">
-            {data.map((problemCard) => (
+            {data.map((problem) => (
                 <ProblemCard
-                    key={problemCard.id}
-                    problemCard={problemCard}
+                    key={problem.id}
+                    problemCard={problem}
                     editable={editable}
                 />
             ))}

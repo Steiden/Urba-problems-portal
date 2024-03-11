@@ -1,9 +1,8 @@
 import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
 import { MainAbout } from "./MainAbout/MainAbout";
 import { ProblemsList } from "./ProblemsList/ProblemsList";
-import { TypeProblemCard } from "../api/types/DatabaseTypes";
-import { endpoints_basic } from "../api/config";
-import { getData } from "../api/Data";
+import { TypeProblemFromServer } from "../api/problems/ProblemsTypes";
+import { getProblems } from "../api/problems/Problems";
 
 type TypeProps = {
     loginForm: {
@@ -18,21 +17,19 @@ type TypeProps = {
 }
 
 export const MainPage = ({ loginForm, registerForm, isAuthorized }: TypeProps): ReactNode => {
-    const [problemsCards, setProblemsCards]: [TypeProblemCard[], Dispatch<SetStateAction<TypeProblemCard[]>>] =
-        useState([] as TypeProblemCard[]);
+    const [problemsCards, setProblemsCards]: [TypeProblemFromServer[], Dispatch<SetStateAction<TypeProblemFromServer[]>>] =
+        useState([] as TypeProblemFromServer[]);
 
     useEffect(() => {
-        async function getProblems(): Promise<void> {
-            const data: TypeProblemCard[] = (await getData(
-                `${endpoints_basic.problems}?status_id=2`
-            )) as TypeProblemCard[];
+        async function getProblemsList(): Promise<void> {
+            const data: TypeProblemFromServer[] | Error = await getProblems([`status_id=2`]);
 
             if (data instanceof Error) return;
 
             setProblemsCards(data);
         }
 
-        getProblems();
+        getProblemsList();
     }, []);
 
     return (
