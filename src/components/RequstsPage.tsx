@@ -4,6 +4,7 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 import { TypeUserFromServer } from "../api/users/UsersTypes";
 import { TypeProblemFromServer } from "../api/problems/ProblemsTypes";
 import { getProblems } from "../api/problems/Problems";
+import { getJWT } from "../helpers/jwtHelper";
 
 type TypeProps = {
     isAuthorized: boolean;
@@ -17,10 +18,9 @@ export const RequestsPage = ({ isAuthorized, user }: TypeProps): ReactNode => {
 
     const navigate: NavigateFunction = useNavigate();
 
-    useEffect(() => {
-        if (!isAuthorized) {
+    useEffect(() => {        
+        if (!getJWT() && !isAuthorized && !user.id) {
             navigate("/");
-            return;
         }
     }, [isAuthorized, user]);
 
@@ -34,7 +34,7 @@ export const RequestsPage = ({ isAuthorized, user }: TypeProps): ReactNode => {
         }
 
         getProblemsList();
-    }, [problemsList]);
+    }, [user]);
 
     return <ProblemsList data={problemsList} title="Мои заявки" editable={true} />;
 };
