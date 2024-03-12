@@ -17,14 +17,14 @@ export const RequestForm = ({ user }: TypeProps): ReactNode => {
 
     const navigate = useNavigate();
 
-    const handleImageChanged: FormEventHandler<HTMLInputElement> = (e: FormEvent<HTMLInputElement>) => {
-        const imageChanged: string = e.currentTarget.value;        
+    const handleImageChange: FormEventHandler<HTMLInputElement> = (e: FormEvent<HTMLInputElement>) => {
+        const imageChanged: string = e.currentTarget.value;
 
         if (!imageChanged.endsWith(".png") && !imageChanged.endsWith(".jpg") && !imageChanged.endsWith(".jpeg") && !imageChanged.endsWith(".webp")) {
             setImage(image);
         } else {
             setImage(imageChanged);
-        }        
+        }
     };
 
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (e: FormEvent<HTMLFormElement>) => {
@@ -74,7 +74,13 @@ export const RequestForm = ({ user }: TypeProps): ReactNode => {
                         <label htmlFor="image" className="profile__label">
                             Загрузите изображение
                         </label>
-                        <input type="file" id="image" className="profile__input" value={image} onChange={handleImageChanged} />
+                        <div className="profile__input--custom">
+                            <label className="profile__input-button" htmlFor="image">
+                                Загрузить
+                            </label>
+                            <label htmlFor="image">{image}</label>
+                        </div>
+                        <input type="file" id="image" className="profile__input profile__input--hidden" value={image} onChange={handleImageChange} />
                         <span className={`profile__input-error ${!image && "profile__input-error--active"}`}>*Заполните поле изображения</span>
                     </div>
                 </div>
