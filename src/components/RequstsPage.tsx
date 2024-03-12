@@ -36,5 +36,5 @@ export const RequestsPage = ({ isAuthorized, user }: TypeProps): ReactNode => {
         getProblemsList();
     }, [user]);
 
-    return <ProblemsList data={problemsList} title="Мои заявки" editable={true} />;
+    return <ProblemsList problemState={{ problemsList, setProblemsList }} title="Мои заявки" editable={true} />;
 };

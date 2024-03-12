@@ -37,7 +37,7 @@ export const ProblemsPage = ({ isAuthorized }: TypeProps): ReactNode => {
 
     return (
         <>
-            <ProblemsList data={problemsList} title="Городские проблемы" editable={false} />
+            <ProblemsList problemState={{ problemsList, setProblemsList }} title="Городские проблемы" editable={false} />
         </>
     );
 };

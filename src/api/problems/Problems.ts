@@ -1,4 +1,4 @@
-import { endpoints_basic } from "../config";
+import { endpoints_basic, endpoints_current } from "../config";
 import { TypeProblemFromServer, TypeProblemToPost, TypeProblemsToComeFromServer } from "./ProblemsTypes";
 
 // * Получение всех проблем
@@ -28,5 +28,22 @@ export const addProblem = async (data: TypeProblemToPost, jwt: string): Promise<
 
     const problem: Promise<TypeProblemFromServer> = response.json();
     return problem;
+};
+// * ______________________________________________________________________________________________________________
+
+
+// * Удаление проблемы
+export const deleteProblem = async (id: number, jwt: string): Promise<string | Error> => {
+    const response: Response = await fetch(endpoints_current.problem(id), {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${jwt}`,
+        }
+    });
+
+    if (!response.ok) return new Error(response.statusText);
+
+    const message: Promise<string> = response.json() as Promise<string>;
+    return message;
 };
 // * ______________________________________________________________________________________________________________

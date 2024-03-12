@@ -13,12 +13,13 @@ type TypeProps = {
         isOpen: boolean;
         setIsOpen: Dispatch<SetStateAction<boolean>>;
     };
-    isAuthorized: boolean
-}
+    isAuthorized: boolean;
+};
 
 export const MainPage = ({ loginForm, registerForm, isAuthorized }: TypeProps): ReactNode => {
-    const [problemsCards, setProblemsCards]: [TypeProblemFromServer[], Dispatch<SetStateAction<TypeProblemFromServer[]>>] =
-        useState([] as TypeProblemFromServer[]);
+    const [problemsCards, setProblemsCards]: [TypeProblemFromServer[], Dispatch<SetStateAction<TypeProblemFromServer[]>>] = useState(
+        [] as TypeProblemFromServer[]
+    );
 
     useEffect(() => {
         async function getProblemsList(): Promise<void> {
@@ -35,7 +36,11 @@ export const MainPage = ({ loginForm, registerForm, isAuthorized }: TypeProps): 
     return (
         <>
             <MainAbout loginForm={loginForm} registerForm={registerForm} isAuthorized={isAuthorized} />
-            <ProblemsList data={problemsCards} title="Последние решенные проблемы" editable={false} />
+            <ProblemsList
+                problemState={{ problemsList: problemsCards, setProblemsList: setProblemsCards }}
+                title="Последние решенные проблемы"
+                editable={false}
+            />
         </>
     );
 };

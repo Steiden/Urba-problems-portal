@@ -39,9 +39,12 @@
 
 .main__card-img-container {
     position: relative;
+    width: 100%;
 }
 
 .main__card-img {
+    min-width: 250px;
+    min-height: 250px;
 }
 
 .main__card-content {
